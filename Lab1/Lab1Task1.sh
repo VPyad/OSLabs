@@ -1,0 +1,1 @@
+cd; du -sh -- * > folders-size.txt
