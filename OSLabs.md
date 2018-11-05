@@ -41,7 +41,10 @@ du -sh -- * >> folders-size.txt
 
 ## Part 2
 
-### Task1
+### Tasks
 	* http://bikmeyev-at.ugatu.su/students/OSiS/labProc/os_lab_process.pdf
 	* http://bikmeyev-at.ugatu.su/students/OSiS/labProc/os_02.html
 	* https://unix.stackexchange.com/questions/2107/how-to-suspend-and-resume-processes -> suspend and resume process
+	* https://unix.stackexchange.com/questions/85466/how-to-see-process-created-by-specific-user-in-unix-linux -> get process by user
+
+#### Manual

@@ -10,4 +10,4 @@
  4. in new terminal window:
   * kill -TSTP [pid] -> to suspend process (https://unix.stackexchange.com/questions/2107/how-to-suspend-and-resume-processes)
   * kill -CONT [pid] -> to resume process
- 5. 
+ 5. htop -u root OR top -U root OR ps ux --deselect -U root
