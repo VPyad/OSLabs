@@ -29,3 +29,19 @@ du -sh -- * >> folders-size.txt
 	* https://superuser.com/questions/215896/search-for-a-text-pattern-in-linux
 	* https://stackoverflow.com/questions/12516937/grep-but-only-certain-file-extensions
 	* grep -r -l --include "*.txt" "search term" > serach_result.txt
+
+# Lab2
+
+## Part 1
+
+### Task 1
+#### Commands
+	* https://unix.stackexchange.com/questions/45025/how-to-suspend-and-bring-a-background-process-to-foreground -> bg & fg commands
+	* https://www.maketecheasier.com/run-bash-commands-background-linux/ -> background commands for dummy
+
+## Part 2
+
+### Task1
+	* http://bikmeyev-at.ugatu.su/students/OSiS/labProc/os_lab_process.pdf
+	* http://bikmeyev-at.ugatu.su/students/OSiS/labProc/os_02.html
+	* https://unix.stackexchange.com/questions/2107/how-to-suspend-and-resume-processes -> suspend and resume process
