@@ -13,4 +13,4 @@ do
 	echo "$i" >> $pathToLog;
 done
 
-echo "Done!";
+echo "Script2 Done!";
