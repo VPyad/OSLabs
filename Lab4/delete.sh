@@ -72,8 +72,33 @@ then
 	fi
 fi
 
+# all critereas specified, but no songs mathes
 if [ ${#year_array[@]} = 0 ] && [ ! "$year" = "" ] && [ ${#genre_array[@]} = 0 ] && [ ! "$genre" = "" ] && [ ${#singer_array[@]} = 0 ] && [ ! "$singer" = "" ]
 then
 	echo "No songs mathes your criterea"
 	return
 fi
+
+# CODE BELLOW IS UNTESTED
+# all critereas specified, but only year mathes
+if [ ${#year_array[@]} > 0 ] && [ ! "$year" = "" ] && [ ${#genre_array[@]} = 0 ] && [ ! "$genre" = "" ] && [ ${#singer_array[@]} = 0 ] && [ ! "$singer" = "" ]
+then
+	echo "No songs mathes your criterea"
+	return
+fi
+
+# all critereas specified, but only genre mathes
+if [ ${#year_array[@]} = 0 ] && [ ! "$year" = "" ] && [ ${#genre_array[@]} > 0 ] && [ ! "$genre" = "" ] && [ ${#singer_array[@]} = 0 ] && [ ! "$singer" = "" ]
+then
+	echo "No songs mathes your criterea"
+	return
+fi
+
+# all critereas specified, but only singer mathes
+if [ ${#year_array[@]} = 0 ] && [ ! "$year" = "" ] && [ ${#genre_array[@]} = 0 ] && [ ! "$genre" = "" ] && [ ${#singer_array[@]} > 0 ] && [ ! "$singer" = "" ]
+then
+	echo "No songs mathes your criterea"
+	return
+fi
+
+# there is a song(s) that mathes all critereas
