@@ -15,41 +15,6 @@ delete_songs() {
 	done
 }
 
-find_intersection_and_delete()
-{
-	array1=( "$1" )
-	array2=( "$2" )
-	array3=( "$3" )
-
-	intersection2=()
-	result=()
-
-	if [ -z "$array3" ]
-	then
-		l2=" ${array2[*]} "                   
-		for item in ${array1[@]}; do
-  			if [[ $l2 =~ " $item " ]] ; then
-    			result+=($item)
-  			fi
-		done
-	else
-		l2=" ${array2[*]} "                   
-		for item in ${array1[@]}; do
-  			if [[ $l2 =~ " $item " ]] ; then
-    			intersection2+=($item)
-  			fi
-		done
-		l3=" ${array3[*]} "                   
-		for item in ${intersection2[@]}; do
-  			if [[ $l3 =~ " $item " ]] ; then
-    			result+=($item)
-  			fi
-		done
-	fi
-
-	delete_songs result
-}
-
 if [ "$year" = "" ] && [ "$genre" = "" ] && [ "$singer" = "" ]
 then
 	echo "Error: enter at least one criteria!";
@@ -142,7 +107,7 @@ fi
 # all critereas specified, but only genre mathes
 if [ ${#year_array[@]} = 0 ] && [ ! ${#genre_array[@]} = 0 ] && [ ${#singer_array[@]} = 0 ]
 then
-	delete_songs $genre_array
+	delete_songs "${genre_array[@]}"
 	bash index.sh
 	exit
 fi
@@ -150,7 +115,7 @@ fi
 # all critereas specified, but only singer mathes
 if [ ${#year_array[@]} = 0 ] && [ ${#genre_array[@]} = 0 ] && [ ! ${#singer_array[@]} = 0 ]
 then
-	delete_songs $singer_array
+	delete_songs "${singer_array[@]}"
 	bash index.sh
 	exit
 fi
@@ -158,15 +123,37 @@ fi
 # all critereas specified, but only year and genre mathes
 if [ ! ${#year_array[@]} = 0 ] && [ ! ${#genre_array[@]} = 0 ] && [ ${#singer_array[@]} = 0 ]
 then
-	find_intersection_and_delete $year_array $genre_array
+	result=()
+
+	l2=" ${genre_array[*]} "                   
+	for item in ${year_array[@]}; do
+  		if [[ $l2 =~ " $item " ]] ; then
+    		result+=($item)
+  		fi
+	done
+
+	delete_songs "${result[@]}"
+
 	bash index.sh
 	exit
 fi
 
 # all critereas specified, but only year and singer mathes
-if [ ${#year_array[@]} > 0 ] && [ ! "$year" = "" ] && [ ${#genre_array[@]} = 0 ] && [ ! "$genre" = "" ] && [ ${#singer_array[@]} > 0 ] && [ ! "$singer" = "" ]
+if [ ! ${#year_array[@]} = 0 ] && [ ${#genre_array[@]} = 0 ] && [ ! ${#singer_array[@]} = 0 ]
 then
-	find_intersection_and_delete $year_array $singer_array
+	#echo "singer - year"
+
+	result=()
+
+	l2=" ${singer_array[*]} "                   
+	for item in ${year_array[@]}; do
+  		if [[ $l2 =~ " $item " ]] ; then
+    		result+=($item)
+  		fi
+	done
+
+	delete_songs "${result[@]}"
+
 	bash index.sh
 	exit
 fi
@@ -174,8 +161,28 @@ fi
 # all critereas specified, but only genre and singer mathes
 if [ ${#year_array[@]} = 0 ] && [ ! ${#genre_array[@]} = 0 ] && [ ! ${#singer_array[@]} = 0 ]
 then
-	echo "singer and genre condition"
-	find_intersection_and_delete $genre_array $singer_array
+	#echo "singer - genre"
+	result=()
+
+	#echo "genres"
+	#for i in "${genre_array[@]}"; do
+    #	echo "$i"
+	#done
+
+	#echo "singers"
+	#for i in "${singer_array[@]}"; do
+    #	echo "$i"
+	#done
+
+	l2=" ${singer_array[*]} "                   
+	for item in ${genre_array[@]}; do
+  		if [[ $l2 =~ " $item " ]] ; then
+    		result+=($item)
+  		fi
+	done
+
+	delete_songs "${result[@]}"
+
 	bash index.sh
 	exit
 fi
@@ -183,7 +190,25 @@ fi
 # there is a song(s) that mathes all critereas
 if [ ! ${#year_array[@]} = 0 ] && [ ! ${#genre_array[@]} = 0 ] && [ ! ${#singer_array[@]} = 0 ]
 then
-	find_intersection_and_delete $year_array $genre_array $singer_array
+	#echo "all mathes"
+	intersection2=()
+	result=()
+
+	l2=" ${genre_array[*]} "                   
+	for item in ${year_array[@]}; do
+  		if [[ $l2 =~ " $item " ]] ; then
+    		intersection2+=($item)
+  		fi
+	done
+	l3=" ${singer_array[*]} "                   
+	for item in ${intersection2[@]}; do
+  		if [[ $l3 =~ " $item " ]] ; then
+    		result+=($item)
+  		fi
+	done
+
+	delete_songs $result
+
 	bash index.sh
 	exit
 fi
